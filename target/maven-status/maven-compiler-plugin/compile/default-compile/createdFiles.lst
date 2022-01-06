@@ -1,0 +1,9 @@
+backend\entity\User.class
+backend\service\UserService.class
+backend\controller\UserController.class
+backend\AppConfig.class
+backend\dao\AbstractDao.class
+backend\DatabaseInitializer.class
+backend\AppConfig$1.class
+backend\dao\UserDao.class
+backend\entity\AbstractEntity.class
