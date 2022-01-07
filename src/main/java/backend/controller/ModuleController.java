@@ -68,6 +68,6 @@ public class ModuleController {
     @GetMapping("/getmodulearticles")
     public ModelAndView getarticles(@RequestParam("moduleid")long moduleid){
         List<Article> articles = articleService.getModuleArticles(moduleid);
-        return new ModelAndView("articlelist.html",Map.of("articles",articles));
+        return new ModelAndView("searchresult.html",Map.of("articles",articles));
     }
 }
