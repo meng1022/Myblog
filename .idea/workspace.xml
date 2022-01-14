@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aba12daf-7961-4d35-9720-d30685fa563d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/springmvcblog.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/AppConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/DatabaseInitializer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/Interceptor/LoggerInterceptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controller/ApiController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controller/ArticleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controller/IndexController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controller/ModuleController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/controller/UserController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dao/AbstractDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/entity/AbstractEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/entity/Article.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/entity/Module.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/service/ArticleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/service/ModuleService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/backend/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/500.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/aboutme.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/article.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/articlelist.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/createmodule.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/editarticle.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/experience.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/modulelist.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/profile.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/projects.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/searchresult.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/signin.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/templates/writearticle.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/css/blog.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/css/form.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/images/0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/AppConfig$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/AppConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/DatabaseInitializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/Interceptor/LoggerInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/controller/ApiController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/controller/ArticleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/controller/IndexController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/controller/ModuleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/controller/UserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/dao/AbstractDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/dao/UserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/entity/AbstractEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/entity/Article.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/entity/Module.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/service/ArticleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/service/ModuleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/backend/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/springmvcblog-1.0-SNAPSHOT.jar" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\Programming Tools\Maven\maven-repository" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="22nTG2GrbXiy5IOGMg5tAlj7ZIV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="hsqldb" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.66306955" />
+    <property name="settings.editor.selected.configurable" value="preferences.applicationServers" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Blog\springmvcblog\src\main\webapp\static\images" />
+      <recent name="D:\Blog\springmvcblog\src\main\webapp\static\css" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="backend.dao" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="AppConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
+      <option name="MAIN_CLASS_NAME" value="backend.AppConfig" />
+      <module name="springmvcblog" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="backend.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AppConfig" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aba12daf-7961-4d35-9720-d30685fa563d" name="Default Changelist" comment="" />
+      <created>1640472254031</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640472254031</updated>
+      <workItem from="1640472255174" duration="985000" />
+      <workItem from="1640473274914" duration="641000" />
+      <workItem from="1640474014057" duration="59090000" />
+      <workItem from="1640657437551" duration="24873000" />
+      <workItem from="1640797001683" duration="109272000" />
+      <workItem from="1641775842126" duration="21651000" />
+      <workItem from="1642003523500" duration="19119000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.lang.String" memberName="value" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>
