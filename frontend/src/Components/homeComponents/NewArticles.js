@@ -1,6 +1,9 @@
 import {Divider, Grid, Typography, Link} from "@mui/material";
 import * as React from "react";
 import {Link as RouterLink, useParams} from 'react-router-dom';
+import ReactMarkdown from "react-markdown";
+import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
+import * as Color from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 
 function NewArticles(){
@@ -49,7 +52,29 @@ function NewArticles(){
                         </Link>
                     </Typography>
                     <div>Write on {article.createZoneDate}</div>
-                    <div dangerouslySetInnerHTML={{__html:article.content}}></div>
+                    {/*<div dangerouslySetInnerHTML={{__html:article.content}}></div>*/}
+                    <div>
+                        <ReactMarkdown children={article.content}
+                                       components={{
+                                           code({node, inline, className, children, ...props}) {
+                                               const match = /language-(\w+)/.exec(className || '')
+                                               return !inline && match ? (
+                                                   <SyntaxHighlighter
+                                                       children={String(children).replace(/\n$/, '')}
+                                                       style={Color.prism}
+                                                       language={match[1]}
+                                                       PreTag="div"
+                                                       {...props}
+                                                   />
+                                               ) : (
+                                                   <code className={className} {...props}>
+                                                       {children}
+                                                   </code>
+                                               )
+                                           }
+                                       }}
+                        />
+                    </div>
                     <Divider/>
                 </div>
             ))}

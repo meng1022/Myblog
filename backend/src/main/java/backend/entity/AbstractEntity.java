@@ -20,7 +20,8 @@ public class AbstractEntity {
         this.id = id;
     }
 
-    @Column(nullable = false,updatable = false)
+//    (nullable = false,updatable = false)
+    @Column
     public Long getCreateTime(){
         return createTime;
     }

@@ -8,10 +8,12 @@ import backend.Result;
 import backend.entity.Article;
 import backend.entity.Module;
 import backend.entity.User;
+import backend.service.ArticleModuleService;
 import backend.service.ArticleService;
 import backend.service.ModuleService;
+import com.alibaba.fastjson.JSONArray;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +25,8 @@ public class ArticleController {
     ArticleService articleService;
     @Autowired
     ModuleService moduleService;
+    @Autowired
+    ArticleModuleService articleModuleService;
 
     public static final String KEY_USER = "__user__";
     public static final int PageSize = 10;
@@ -33,121 +37,87 @@ public class ArticleController {
                 Map.of("error",ex.getClass().getSimpleName(),"message",ex.getMessage()));
     }
 
-//    @GetMapping("/getarticles")
-//    public ModelAndView getArticles(@RequestParam("pageidx")int pageidx){
-//        List<Article> list = articleService.getArticles();
-//        int pagenum = list.size()/PageSize+((list.size()%PageSize==0)?0:1);
-//        ModelAndView mv = new ModelAndView("articlelist.html");
-//        int lastarticle = (pageidx*PageSize<=list.size())?pageidx*PageSize:list.size();
-//        mv.addObject("articles",list.subList((pageidx-1)*PageSize,lastarticle));
-//        mv.addObject("pagenum",pagenum);
-//        mv.addObject("curpage",pageidx);
-//        return mv;
-//    }
-
     @GetMapping("/getarticles")
     public Result getArticles(){
         try {
             List<Article> list = articleService.getArticles();
-//            List<Module> modules = moduleService.getmodules();
-//            Map<String,Object> map = new HashMap<>();
-//            map.put("modules",modules);
-//            map.put("articles",list);
-//            return Result.SetOk(map);
             return Result.SetOk(list);
         }catch (Exception e) {
             return Result.SetError(e.getMessage());
         }
     }
 
-//    @GetMapping("/getarticle")
-//    public ModelAndView getarticle(@RequestParam("articleid")long articleid,
-//                                   HttpSession session){
-//        Article article = articleService.getArticle(articleid);
-//        Module module = moduleService.getModule(article.getModuleid());
-//        ModelAndView mv = new ModelAndView("article.html",Map.of("article",article,"module",module));
-//        User user = (User) session.getAttribute(KEY_USER);
-//        if(user!=null)
-//            mv.addObject("user",user);
-//        return mv;
-//    }
     @GetMapping("/getarticle")
     public Result getarticle(@RequestParam("articleid")long articleid,
                                    HttpSession session){
         try{
-            Article article = articleService.getArticle(articleid);
+            //"article":article; "modules":moduleids; modulenames:modules;
+            Map<String,Object> article = articleService.getArticle(articleid);
             return Result.SetOk(article);
         }catch (Exception e){
             return Result.SetError(e.getMessage());
         }
-//        Module module = moduleService.getModule(article.getModuleid());
     }
-
-    @GetMapping("/writearticle")
-    public ModelAndView writearticle(HttpSession session){
-        User user = (User)session.getAttribute(KEY_USER);
-        if(user!=null&&user.getId()==1){
-            List<Module> modules = moduleService.getmodules();
-            return new ModelAndView("writearticle.html",Map.of("modules",modules));
-        }
-        else
-            throw new RuntimeException("Sorry, you have no authorization");
-    }
-
 
     @PostMapping("/writearticle")
-    public ModelAndView writearticle(@RequestParam("title")String title,
-                                     @RequestParam("content")String content,
-                                     @RequestParam("moduleid")long moduleid,
-                                     HttpSession session){
-        User user = (User)session.getAttribute(KEY_USER);
-        if(user!=null&&user.getId()==1) {
-            articleService.writeArticle(title,content,moduleid);
-            return new ModelAndView("redirect:/getarticles?pageidx=1");
+    public Result writearticle(@RequestBody Map newArticle,HttpSession session){
+        String title = (String) newArticle.get("title");
+        String content = (String) newArticle.get("content");
+        List<Integer> moduleids = (List<Integer>) newArticle.get("moduleids");
+        try{
+            long articleid = articleService.writeArticle(title,content);
+            articleModuleService.writeArticle(articleid,moduleids);
+            return Result.SetOk(null);
+        }catch (Exception e){
+            return Result.SetError("unable to insert into db");
         }
-        else
-            throw new RuntimeException("Sorry, you have no authorization");
+
     }
 
     @GetMapping("/editarticle")
-    public ModelAndView editarticle(@RequestParam("articleid")long articleid,
-                                    HttpSession session){
-        User user = (User)session.getAttribute(KEY_USER);
-        if(user!=null&&user.getId()==1) {
-            List<Module> modules = moduleService.getmodules();
-            Article article = articleService.getArticle(articleid);
-            return new ModelAndView("editarticle.html",Map.of("article",article,
-                                                                        "modules",modules));
-        }
-        else
-            throw new RuntimeException("Sorry, you have no authorization");
+    public Result editarticle(@RequestParam("articleid")long articleid,
+                              HttpSession session){
+        Map<String,Object> ans = new HashMap<>(articleService.getArticle(articleid));
+        ans.put("totalModules",moduleService.getmodules());
+        return Result.SetOk(ans);
     }
 
     @PostMapping("/editarticle")
-    public ModelAndView editarticle(@RequestParam("moduleid")long moduleid,
-                                    @RequestParam("title")String title,
-                                    @RequestParam("content")String content,
-                                    @RequestParam("articleid")long articleid,
-                                    HttpSession session){
-        User user = (User)session.getAttribute(KEY_USER);
-        if(user!=null&&user.getId()==1) {
-            articleService.editarticle(articleid,moduleid,title,content);
-            return new ModelAndView("redirect:/getarticle?articleid="+articleid);
+    public Result editarticle(@RequestBody Map editedArticle){
+        try{
+            long articleid =  Long.valueOf((String) editedArticle.get("articleid"));
+            String title = (String) editedArticle.get("title");
+            List<Long> moduleids = JSONArray.parseArray(editedArticle.get("moduleids").toString(),Long.class);
+            String content = (String) editedArticle.get("content");
+            articleService.editarticle(articleid,title,moduleids,content);
+            return Result.SetOk("200 ok");
+        }catch (Exception e){
+            return Result.SetError(e.getMessage());
         }
-        else
-            throw new RuntimeException("Sorry, you have no authorization");
+
     }
 
+//    @PostMapping("/deletearticle")
+//    public ModelAndView deletearticle(@RequestParam("articleid")long articleid,
+//                                      HttpSession session){
+//        User user = (User)session.getAttribute(KEY_USER);
+//        if(user!=null&&user.getId()==1) {
+//            articleService.deletearticle(articleid);
+//            return new ModelAndView("redirect:/getarticles");
+//        }
+//        else
+//            throw new RuntimeException("Sorry, you have no authorization");
+//    }
+
     @PostMapping("/deletearticle")
-    public ModelAndView deletearticle(@RequestParam("articleid")long articleid,
-                                      HttpSession session){
-        User user = (User)session.getAttribute(KEY_USER);
-        if(user!=null&&user.getId()==1) {
-            articleService.deletearticle(articleid);
-            return new ModelAndView("redirect:/getarticles");
-        }
-        else
-            throw new RuntimeException("Sorry, you have no authorization");
+    public Result deletearticle(@RequestBody Map map){
+       try{
+           long articleid = Long.valueOf(map.get("articleid").toString());
+           articleService.deletearticle(articleid);
+           return Result.SetOk("200 ok");
+       }catch (Exception e){
+           return Result.SetError(e.getMessage());
+       }
     }
 
     @PostMapping("/searcharticles")

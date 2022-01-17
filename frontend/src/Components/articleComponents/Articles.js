@@ -1,15 +1,66 @@
-import {Typography, Grid, Link} from "@mui/material";
+import {
+    Typography,
+    Grid,
+    Link,
+    Dialog,
+    DialogTitle,
+    DialogActions,
+    Button,
+    Box,
+    TextField,
+    Container
+} from "@mui/material";
 import * as React from "react";
 import{Link as RouterLink} from 'react-router-dom';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import SearchIcon from '@mui/icons-material/Search';
 
-function DeleteButton(){
-    if(sessionStorage.getItem("Userid")==="84921724")
-        return <Link href={"#"} sx={{ml:'0.5em',textDecoration:'none'}}> <DeleteOutlineIcon/> </Link>
+function DeleteButton(props){
+    const {articleid} = props;
+    const [open,setOpen] = React.useState(false);
+    const handleClickOpen = ()=>{
+        setOpen(true);
+    };
+    const handleClose = ()=>{
+        setOpen(false);
+    };
+
+    function handleDelete(){
+        (async()=>{
+            const response = await fetch("/deletearticle",{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({articleid:articleid})
+            });
+            const body = await response.json();
+            console.log(body.data);
+        })();
+        setOpen(false);
+    };
+
+
+    if(sessionStorage.getItem("__USER_ID__")==="84921724")
+        return (
+            <Button>
+                <DeleteOutlineIcon onClick={handleClickOpen}/>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>
+                        Are you sure to delete this article?
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={handleDelete} href={"/getarticles"}>Delete</Button>
+                        <Button onClick={handleClose}>Dismiss</Button>
+                    </DialogActions>
+                </Dialog>
+            </Button>
+        );
     return null;
 }
+
 function Articles(){
-    // const{articles} = props;
     const [firstLoad,setLoad] = React.useState(true);
     const [articles, updateArticles] = React.useState([]);
 
@@ -26,7 +77,12 @@ function Articles(){
     }
 
     return(
-        <Grid item md={8} sm={11} xs={11} sx={{mr:'2em'}}>
+        <Grid item md={8} sm={11} xs={11} sx={{mr:'2em',mt:'1em'}}>
+            <Container sx={{textAlign:'center',mb:'2em'}}>
+                <TextField width={35} id={"search"} label={"Search Here"} size={"small"} focused/>
+                <Button><SearchIcon/></Button>
+            </Container>
+
             {articles.map((article)=>(
                 <Grid sx={{mt: '1em'}} container>
                     <Grid item md={8} sm={6} xs={12} key={article.id}>
@@ -38,7 +94,7 @@ function Articles(){
                     </Grid>
                     <Grid item md={4} sm={6} xs={12} sx={{textAlign:'center'}}>
                         {article.createZoneDate}
-                        <DeleteButton/>
+                        <DeleteButton articleid={article.id}/>
                     </Grid>
                 </Grid>
             ))}

@@ -14,18 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class ModuleService {
     @Autowired
     HibernateTemplate hibernateTemplate;
-    final Logger logger = LoggerFactory.getLogger(getClass());
+//    final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public Module createmodule(String modulename){
+    public Module createmodule(String modulename) throws Exception{
         Module module = new Module();
         module.setModulename(modulename);
-        try{
-            hibernateTemplate.save(module);
-            return module;
-        }catch (RuntimeException e){
-            logger.info("create module {} failed",modulename);
-            throw new RuntimeException("create module failed");
-        }
+        hibernateTemplate.save(module);
+        return module;
     }
 
     public List<Module> getmodules(){

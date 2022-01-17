@@ -17,7 +17,7 @@ function Projects(){
     //
     // }
     return(
-        <Grid item md={8} sx={{mr:'2em'}}>
+        <Grid item md={8} sx={{mr:'2em',mt:'2em'}}>
             {projects.map((project)=> (
                 <Grid item sx={{mb:'2em'}} md={12} xs={12} >
                     <Card sx={{bgcolor: 'grey.50'}}>

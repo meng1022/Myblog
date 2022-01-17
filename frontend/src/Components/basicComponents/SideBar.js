@@ -1,19 +1,65 @@
-import {Box,Link, Grid, Typography, List, ListItem, Paper, Stack, Divider} from "@mui/material";
-
+import {
+    Box,
+    Link,
+    Grid,
+    Typography,
+    List,
+    ListItem,
+    Paper,
+    Stack,
+    Divider,
+    Button,
+    DialogTitle,
+    DialogActions, Dialog, TextField
+} from "@mui/material";
 import * as React from "react";
 import {Link as RouterLink} from 'react-router-dom';
 
 function FunctionList(){
-    if(sessionStorage.getItem("Userid")==="84921724")
+    const [open,setOpen] = React.useState(false);
+    const [modulename,setModuleName] = React.useState("");
+    const handleOpen = ()=>{
+        setOpen(true);
+    };
+    const handleClose = ()=>{
+        setOpen(false);
+    };
+    const handleChange = (event)=>{
+        setModuleName(event.target.value);
+    };
+    const handleSubmit = ()=>{
+        (async()=>{
+            const response = await fetch("/createmodule",{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({modulename:modulename}),
+            });
+            const body = response.json();
+            console.log(body.data);
+        })();
+        setOpen(false);
+    }
+    if(sessionStorage.getItem("__USER_ID__")==="84921724"){
         return(
             <Box>
                 <Divider/>
-                <List>
-                    <ListItem><Link sx={{textDecoration:'none'}} href={"#"}>Post an article</Link></ListItem>
-                    <ListItem><Link sx={{textDecoration:'none'}} href={"#"}>Create a module</Link></ListItem>
-                </List>
+                <Button sx={{ml:'1em'}} component={RouterLink} to={"/writearticle"}>Post an article</Button>
+                <Button sx={{ml:'1em'}} onClick={handleOpen}>Create a module</Button>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>Please input the new module name:</DialogTitle>
+                    <TextField sx={{ml:'1em',mr:'1em'}} id={"modulename"} label={"Module Name"} onChange={handleChange}/>
+                    <DialogActions>
+                        <Button onClick={handleSubmit}>Submit</Button>
+                        <Button onClick={handleClose}>Dismiss</Button>
+                    </DialogActions>
+                </Dialog>
             </Box>
         );
+    }
+
     return null;
 }
 
@@ -26,26 +72,27 @@ function SideBar(props){
                 <Typography variant="h6" gutterBottom>
                     About
                 </Typography>
-                <Typography>This blog post shows a few different types of content that are
-                    supported and styled with Material styles.
-                    Basic typography, images, and code are all supported.
-                    You can extend these by modifying Markdown.js.</Typography>
+                <Typography>I'm Meng Zhao, welcome to my blog, I just finished my graduate study in software.
+                    This website is developed for the sake of writing down and show you guys some of the projects
+                    i contributed to, some ideas that come to my mind and some inspirational knowledge i obtain.</Typography>
             </Paper>
             <Divider/>
             <Typography  variant={"h6"}>
                 Topics and Modules
             </Typography>
-            <List>
+            {/*<List>*/}
             {modules.map((module)=>(
-                <ListItem key={module.id}>
+                // <ListItem key={module.id}>
+                <Typography sx={{ml:'1em',mb:'0.5em'}}>
                     <Link sx={{textDecoration:'none'}}
                           component={RouterLink}
                           to={`/getmodulearticles/${module.id}`}>
                             {module.modulename}
                     </Link>
-                </ListItem>
+                </Typography>
+                // </ListItem>
             ))}
-            </List>
+            {/*</List>*/}
             <Divider/>
             <Typography variant={"h6"}>
                 Other

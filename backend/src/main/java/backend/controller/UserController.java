@@ -32,8 +32,6 @@ public class UserController {
     public static final String KEY_USER = "__user__";
     final Logger logger = LoggerFactory.getLogger(getClass());
 
-
-
     @ExceptionHandler(RuntimeException.class)
     // catch RuntimeException throwed by this controller and return error page
     public ModelAndView handleUnknownException(Exception ex){
@@ -41,19 +39,6 @@ public class UserController {
                 Map.of("error",ex.getClass().getSimpleName(),"message",ex.getMessage()));
     }
 
-//    @GetMapping("/")
-//    public ModelAndView index(HttpSession session) throws Exception{
-//        User user = (User) session.getAttribute(KEY_USER);
-//        List<Module> modules = moduleService.getmodules();
-//        List<Article> articles = articleService.getRecentArticles();
-//        Map<String,Object> map = new HashMap<>();
-//        if(user!=null)
-//            map.put("user",user);
-//        map.put("modules",modules);
-//        map.put("article1",articles.get(0));
-//        map.put("article2",articles.get(1));
-//        return new ModelAndView("index.html",map);
-//    }
     @GetMapping("/homepage")
     public Result index() {
         try {

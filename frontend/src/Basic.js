@@ -12,16 +12,26 @@ const networks = [
 ];
 
 function MyButton(props) {
-    const { Userid } = props;
-    if(Userid!==""&&Userid!=null)
+    // const { Userid } = props;
+    const {userid,username} = props;
+    const handleLogOut = ()=>{
+        // sessionStorage.removeItem("user");
+        // sessionStorage.setItem("user",null);
+        sessionStorage.removeItem("__USER_ID__");
+        sessionStorage.removeItem("__USER_NAME__");
+    };
+    // if(Userid!==""&&Userid!=null)
+    if(userid!=null&&userid!="")
         return(
-            <Button>
-                Welcome, {Userid}
+            <Button onClick={handleLogOut} href={"/homepage"}>
+                Logout, {username}
+                {/*Logout, {user.username}*/}
             </Button>
         );
     else
         return(
-            <Button variant="outlined" size="small" target={"_blank"} href="https://github.com/login/oauth/authorize?client_id=a5eca1aecf53810e6a8e" >
+            // target={"_blank"}
+            <Button variant="outlined" size="small"  href="https://github.com/login/oauth/authorize?client_id=a5eca1aecf53810e6a8e">
                 <GitHub sx={{mr:'0.5em'}}/>
                 <span >Sign In</span>
             </Button>
@@ -32,7 +42,9 @@ function Basic(props) {
     const { sections, title } = props;
     const [firstLoad,setLoad] = React.useState(true);
     const [Token, setToken] = React.useState("");
-    const [Userid, setUserid] = React.useState(sessionStorage.getItem("Userid"));
+    const [userid, setUserid] = React.useState(sessionStorage.getItem("__USER_ID__"));
+    const [username, setUsername] = React.useState(sessionStorage.getItem("__USER_NAME__"));
+    // const [user, setUser] = React.useState(sessionStorage.getItem("user"));
     const [modules, updateModules] = React.useState([]);
     const queryString = document.location.search;
 
@@ -85,8 +97,11 @@ function Basic(props) {
         let body = await user_response.json();
         if(body.message==="ok"){
             // console.log(body.data);
-            setUserid(body.data);
-            sessionStorage.setItem("Userid",body.data);
+            setUserid(body.data.userid);
+            setUsername(body.data.username);
+            // setUser(body.data);
+            sessionStorage.setItem("__USER_ID__",body.data.userid);
+            sessionStorage.setItem("__USER_NAME__",body.data.username);
         }
     }
 
@@ -95,7 +110,10 @@ function Basic(props) {
         setLoad(false);
     }
 
-    if(queryString!=null&&queryString!=""&&(Userid===""||Userid==null)){
+    // if(queryString!=null&&queryString!=""&&(Userid===""||Userid==null)){
+    //     getUserinfo();
+    // }
+    if(queryString!=null&&queryString!==""&&(userid==null||userid==="")){
         getUserinfo();
     }
 
@@ -113,7 +131,8 @@ function Basic(props) {
                 >
                     {title}
                 </Typography>
-                <MyButton Userid={Userid}></MyButton>
+                {/*<MyButton Userid={Userid}></MyButton>*/}
+                <MyButton userid={userid} username={username}/>
             </Toolbar>
             <Toolbar
                 component="nav"

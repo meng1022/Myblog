@@ -65,7 +65,7 @@ function AboutMe(){
                         <Tab label={"Contact"} {...a11yProps(3)}></Tab>
                     </Tabs>
                 </Grid>
-                <Grid item md={8} sm={8} xs={8} sx={{ml:'3em',mt:'2em'}}>
+                <Grid item md={8} sm={7} xs={5} sx={{ml:'3em',mt:'2em'}}>
                     <TabPanel value={value} index={0}>
                         <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
                             <CardContent>
