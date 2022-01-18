@@ -20,7 +20,7 @@ function Projects(){
         <Grid item md={8} sx={{mr:'2em',mt:'2em'}}>
             {projects.map((project)=> (
                 <Grid item sx={{mb:'2em'}} md={12} xs={12} >
-                    <Card sx={{bgcolor: 'grey.50'}}>
+                    <Card sx={{bgcolor: '#fdf7ec'}}>
                         <CardContent>
                             <Typography variant={"h6"}>
                                 {project.name}
@@ -29,7 +29,7 @@ function Projects(){
                                 {project.technologies}
                             </Typography>
                             <Typography variant={"body1"}>
-                                {project.description},hasurl:truehasurl:truehasurl:true
+                                {project.description}
                             </Typography>
                         </CardContent>
                         <CardActions>

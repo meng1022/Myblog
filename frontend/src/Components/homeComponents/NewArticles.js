@@ -39,7 +39,7 @@ function NewArticles(){
     // }
 
     return(
-        <Grid item md={8} sx={{mr:'2em'}}>
+        <Grid item md={8} sm={11} xs={11} sx={{mr:'2em',mt:'1em'}} >
             <Typography sx={{mb:'1em'}} variant={"h6"}>
                 Newly Posted Articles
             </Typography>

@@ -1,6 +1,7 @@
 package backend.controller;
 
 import backend.Result;
+import backend.Utils.imgUtil;
 import backend.entity.GitUser;
 import backend.entity.User;
 import backend.service.ApiService;
@@ -12,7 +13,9 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URL;
 
@@ -26,6 +29,8 @@ public class ApiController {
     UserService userService;
     @Autowired
     ApiService apiService;
+    @Autowired
+    imgUtil img_util;
 
 //    @GetMapping("/user/{id}")
 //    public User getuser(@PathVariable("id")long id){
@@ -73,4 +78,26 @@ public class ApiController {
         }
     }
 
+    @PostMapping("/uploadImg")
+    public Result storeImg(@RequestParam("myImage") MultipartFile img){
+        if(img==null)
+            return Result.SetOk("no picture uploaded");
+        else{
+            try{
+                String imgname = img_util.uploadImg(img);
+                return Result.SetOk(imgname);
+            }catch (Exception e){
+                return Result.SetError(e.getMessage());
+            }
+        }
+    }
+
+    @GetMapping("/getImg/{imgName}")
+    public ResponseEntity<?> getImg(@PathVariable String imgName){
+        try{
+            return ResponseEntity.ok(img_util.getImg(imgName));
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -5,6 +5,7 @@ import ReactMarkdown  from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import * as Color from 'react-syntax-highlighter/dist/esm/styles/prism'
 import {useParams} from "react-router-dom";
+import UploadImg from "../uploadImgComponents/UploadImg";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -96,7 +97,8 @@ function EditComponent(){
                         ))}
                     </Select>
                 </FormControl>
-                <TextField sx={{mt:'2em'}} fullWidth
+                <UploadImg/>
+                <TextField fullWidth
                            id={"content"} label={"Please type in your content here"}
                            rows={20} multiline
                            onChange={ContentChange}

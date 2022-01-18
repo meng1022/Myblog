@@ -16,9 +16,7 @@ import avatarMe from "../static/images/avatarMe.png";
 import BUPT_LOGO from "../static/images/BUPT_LOGO.png";
 import UW_LOGO from "../static/images/UW_LOGO.png";
 
-const panels=[
 
-];
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -59,15 +57,15 @@ function AboutMe(){
                     <Tabs orientation={"vertical"}
                           value={value}
                         onChange={handleChange}>
-                        <Tab label={"AboutMe"} {...a11yProps(0)}></Tab>
-                        <Tab label={"Education"} {...a11yProps(1)}></Tab>
-                        <Tab label={"Programming Skills"} {...a11yProps(2)}></Tab>
-                        <Tab label={"Contact"} {...a11yProps(3)}></Tab>
+                        <Tab label={"AboutMe"} {...a11yProps(0)}/>
+                        <Tab label={"Education"} {...a11yProps(1)}/>
+                        <Tab label={"Programming Skills"} {...a11yProps(2)}/>
+                        <Tab label={"Contact"} {...a11yProps(3)}/>
                     </Tabs>
                 </Grid>
                 <Grid item md={8} sm={7} xs={5} sx={{ml:'3em',mt:'2em'}}>
                     <TabPanel value={value} index={0}>
-                        <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
+                        <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     I'm Meng Zhao, welcome to my blog, I just finished my graduate study in software. This website is
@@ -78,7 +76,7 @@ function AboutMe(){
                         </Card>
                     </TabPanel>
                     <TabPanel value={value} index={1}>
-                        <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
+                        <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardActionArea href={"https://uwaterloo.ca/"} target={"_blank"}>
                                 <CardHeader avatar={<Avatar alt="University of Waterloo" src={UW_LOGO} sx={{ width: 100, height: 100,}}/>}></CardHeader>
                             </CardActionArea>
@@ -89,7 +87,7 @@ function AboutMe(){
                                 </Typography>
                             </CardContent>
                         </Card>
-                        <Card sx={{bgcolor: 'grey.50'}}>
+                        <Card sx={{bgcolor: '#fdf7ec'}}>
                             <CardActionArea href={"https://www.bupt.edu.cn/"} target={"_blank"}>
                                 <CardHeader avatar={<Avatar alt="BUPT" src={BUPT_LOGO} sx={{ width: 100, height: 100,}}/>}></CardHeader>
                             </CardActionArea>
@@ -102,28 +100,28 @@ function AboutMe(){
                         </Card>
                     </TabPanel>
                     <TabPanel value={value} index={2}>
-                        <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
+                        <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     Languages: Java, SQL, Python, C/C++, JavaScript, JSP
                                 </Typography>
                             </CardContent>
                         </Card>
-                        <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
+                        <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     Frameworks: Spring-related frameworks, Hibernate, Mybatis, Django, React.js, Vue.js, JUnit, Shiro
                                 </Typography>
                             </CardContent>
                         </Card>
-                        <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
+                        <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     Developer tools: IntelliJ IDEA, Visual Studio Code, PyCharm, WebStorm, Maven, Git, Eclipse
                                 </Typography>
                             </CardContent>
                         </Card>
-                        <Card sx={{bgcolor: 'grey.50',mb:'2em'}}>
+                        <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     Other: REST API, JavaMail, Redis, HikariCP, Druid

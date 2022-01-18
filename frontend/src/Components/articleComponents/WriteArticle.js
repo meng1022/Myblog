@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ErrorPage from "../ErrorPage";
+import UploadImg from "../uploadImgComponents/UploadImg";
 import {Grid, FormControl, TextField, InputLabel, Select, MenuItem, Button, Paper} from "@mui/material";
 import ReactMarkdown  from 'react-markdown';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
@@ -86,7 +87,8 @@ function WriteComponent(){
                         ))}
                     </Select>
                 </FormControl>
-                <TextField sx={{mt:'2em'}} fullWidth id={"content"} label={"Please type in your content here"} rows={20} multiline onChange={ContentChange}></TextField>
+                <UploadImg/>
+                <TextField sx={{}} fullWidth id={"content"} label={"Please type in your content here"} rows={20} multiline onChange={ContentChange}/>
                 <Paper sx={{mt:'2em',pl:'1em',pr:'1em'}} variant={"outlined"} >
                     <ReactMarkdown children={content}
                                    components={{

@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import * as Color from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ReactMarkdown from "react-markdown";
+// import clientid from "../../static/articleimgs/clientid.png";
 
 function EditButton(props){
     const{articleid} = props;
@@ -36,6 +37,8 @@ function Article(){
     }
     return(
           <Grid item md={8} xs={11} sx={{ml:'2em',mr:'2em', mt:'2em'}}>
+              {/*<img src={clientid}></img>*/}
+              {/*<input type={"file"}/>*/}
               <Typography variant={"h5"}>
               {article.title}
                   <EditButton articleid={article.id}/>

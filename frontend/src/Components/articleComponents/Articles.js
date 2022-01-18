@@ -63,6 +63,7 @@ function DeleteButton(props){
 function Articles(){
     const [firstLoad,setLoad] = React.useState(true);
     const [articles, updateArticles] = React.useState([]);
+    const [search,setSearchKey] = React.useState("");
 
     async function getData(){
         let response = await fetch("/getarticles");
@@ -76,11 +77,33 @@ function Articles(){
         setLoad(false);
     }
 
+    const handleChange = (event)=>{
+        setSearchKey(event.target.value);
+    }
+
+    function handleSearch(){
+        (async()=>{
+            const response = await fetch("/searcharticles",{
+               method:'POST',
+               headers:{
+                   'Accept':'application/json',
+                   'Content-Type':'application/json',
+               },
+               body: JSON.stringify({search:search}),
+            });
+            const body = await response.json();
+            updateArticles(body.data);
+        })();
+
+    }
+
     return(
         <Grid item md={8} sm={11} xs={11} sx={{mr:'2em',mt:'1em'}}>
             <Container sx={{textAlign:'center',mb:'2em'}}>
-                <TextField width={35} id={"search"} label={"Search Here"} size={"small"} focused/>
-                <Button><SearchIcon/></Button>
+                <TextField width={35} id={"search"} required={true}
+                           label={"Search Here"} size={"small"} focused
+                            onChange={handleChange}/>
+                <Button onClick={handleSearch}><SearchIcon/></Button>
             </Container>
 
             {articles.map((article)=>(

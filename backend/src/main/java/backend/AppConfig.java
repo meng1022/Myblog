@@ -55,6 +55,7 @@ public class AppConfig {
     public static void main(String[] args) throws Exception{
         Tomcat tomcat = new Tomcat();
         tomcat.setPort(Integer.getInteger("port",8080));
+        tomcat.setBaseDir("/BlogImages/");
         tomcat.getConnector();
         //create web application
         Context ctx = tomcat.addWebapp("",new File("src/main/webapp").getAbsolutePath());

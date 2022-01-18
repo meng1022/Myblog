@@ -120,11 +120,23 @@ public class ArticleController {
        }
     }
 
+//    @PostMapping("/searcharticles")
+//    public ModelAndView search(@RequestParam("searchkey")String key){
+//        List<Article> list = articleService.searchArticles(key);
+//        ModelAndView mv = new ModelAndView("searchresult.html");
+//        mv.addObject("articles",list);
+//        return mv;
+//    }
+
     @PostMapping("/searcharticles")
-    public ModelAndView search(@RequestParam("searchkey")String key){
-        List<Article> list = articleService.searchArticles(key);
-        ModelAndView mv = new ModelAndView("searchresult.html");
-        mv.addObject("articles",list);
-        return mv;
+    public Result search(@RequestBody Map map){
+        try{
+            String key = (String) map.get("search");
+            List<Article> list = articleService.searchArticles(key);
+            return Result.SetOk(list);
+        }catch (Exception e){
+            return Result.SetError(e.getMessage());
+        }
     }
+
 }
