@@ -51,19 +51,17 @@ function AboutMe(){
 
     return(
         <Grid item md={8} sm={11} xs={11}>
-            <Grid container>
-                <Grid item md={3} sm={3} xs={4} sx={{mt:'3em'}} >
-                    <Avatar alt="Meng Zhao" src={avatarMe} sx={{ width: 150, height: 150, mb:'2em'}} />
-                    <Tabs orientation={"vertical"}
-                          value={value}
-                        onChange={handleChange}>
-                        <Tab label={"AboutMe"} {...a11yProps(0)}/>
-                        <Tab label={"Education"} {...a11yProps(1)}/>
-                        <Tab label={"Programming Skills"} {...a11yProps(2)}/>
-                        <Tab label={"Contact"} {...a11yProps(3)}/>
-                    </Tabs>
-                </Grid>
-                <Grid item md={8} sm={7} xs={7} sx={{ml:'1em',mt:'1em'}}>
+            <Grid container sx={{mt:'3em'}}>
+                    <Grid item md={11} xs={11}><Avatar alt="Meng Zhao" src={avatarMe} sx={{ width: 150, height: 150, mb:'2em',ml:'2em'}} /></Grid>
+                    <Grid item md={12} xs={12}>
+                        <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons allowScrollButtonsMobile>
+                            <Tab label={"AboutMe"} {...a11yProps(0)}/>
+                            <Tab label={"Education"} {...a11yProps(1)}/>
+                            <Tab label={"Programming Skills"} {...a11yProps(2)}/>
+                            <Tab label={"Contact"} {...a11yProps(3)}/>
+                        </Tabs>
+                    </Grid>
+                <Grid item md={11} sm={11} xs={12} sx={{ml:'0em',mt:'1em'}}>
                     <TabPanel value={value} index={0}>
                         <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>

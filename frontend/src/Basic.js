@@ -118,7 +118,7 @@ function Basic(props) {
     }
 
     return (
-        <Container maxWidth={'lg'} sx={{mb:'2em'}}>
+        <Container maxWidth={'lg'} >
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Button size="small" component={RouterLink} color="inherit" to={"/homepage"}>Home</Button>
                 <Typography
@@ -137,7 +137,7 @@ function Basic(props) {
             <Toolbar
                 component="nav"
                 variant="dense"
-                sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
+                sx={{ justifyContent: 'space-between' }}
             >
                 {sections.map((section) => (
                     <Link
@@ -153,16 +153,20 @@ function Basic(props) {
                     </Link>
                 ))}
             </Toolbar>
-            <Grid container sx={{ml:'1.5em',mr:'0em'}}>
+            <Grid container sx={{ml:'1.5em', minHeight: '90vh',overflow:"hidden"}}>
                 <Outlet/>
-                <SideBar modules={modules} networks={networks}></SideBar>
-                <Grid item md={8} sm={11} xs={11} >
-                <Typography sx={{ mt:'2em',mb:'2em', textAlign:'center'}}>
-                    <Link component={"a"} href={"#"} sx={{textDecoration:'none'}}> go back to top</Link>
-                </Typography>
+                <SideBar modules={modules} networks={networks}/>
+                <Grid item md={8} sm={12} xs={12}>
+                    <Box sx={{top:"100vh",position:"sticky"}}>
+                        <Typography sx={{ mt:'2em',mb:'2em' ,textAlign:'center' }} >
+                            <Link component={"a"} href={"#"} sx={{textDecoration:'none'}}> go back to top</Link>
+                            <Typography color={"text.secondary"}>Copyright ©
+                                <Link component={"a"} href={"/"} sx={{textDecoration:'none'}}> meng-zhao </Link>2022.
+                            </Typography>
+                        </Typography>
+                    </Box>
                 </Grid>
             </Grid>
-
         </Container>
     );
 }

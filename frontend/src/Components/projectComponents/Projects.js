@@ -13,9 +13,6 @@ const projects = [
 ];
 
 function Projects(){
-    // render(){
-    //
-    // }
     return(
         <Grid item md={8} sx={{mr:'2em',mt:'2em'}}>
             {projects.map((project)=> (

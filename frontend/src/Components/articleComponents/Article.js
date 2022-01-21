@@ -37,8 +37,6 @@ function Article(){
     }
     return(
           <Grid item md={8} xs={11} sx={{ml:'0em',mr:'2em', mt:'2em'}}>
-              {/*<img src={clientid}></img>*/}
-              {/*<input type={"file"}/>*/}
               <Typography variant={"h5"}>
               {article.title}
                   <EditButton articleid={article.id}/>
