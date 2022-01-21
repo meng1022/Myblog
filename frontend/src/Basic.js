@@ -153,14 +153,14 @@ function Basic(props) {
                     </Link>
                 ))}
             </Toolbar>
-            <Grid container sx={{ml:'2em',mr:'2em'}}>
+            <Grid container sx={{ml:'1.5em',mr:'0em'}}>
                 <Outlet/>
                 <SideBar modules={modules} networks={networks}></SideBar>
                 <Grid item md={8} sm={11} xs={11} >
                 <Typography sx={{ mt:'2em',mb:'2em', textAlign:'center'}}>
-                <Link component={"a"} href={"#"} sx={{textDecoration:'none'}}> go back to top</Link>
-
-            </Typography></Grid>
+                    <Link component={"a"} href={"#"} sx={{textDecoration:'none'}}> go back to top</Link>
+                </Typography>
+                </Grid>
             </Grid>
 
         </Container>

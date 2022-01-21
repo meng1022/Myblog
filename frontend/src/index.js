@@ -26,17 +26,16 @@ ReactDOM.render(
     <Router>
         <Routes>
             <Route path="/" element={<Basic sections={sections} title="Myblog"/>}>
-                <Route path={""} element={<NewArticles/>}></Route>
-                {/*<Route path={"login"} element={<SignIn/>}></Route>*/}
-                <Route path="homepage" element={<NewArticles/>}></Route>
-                <Route path="getarticles" element={<Articles/>}></Route>
-                <Route path="getarticle/:articleid" element={<Article />}></Route>
-                <Route path={"getmodulearticles/:moduleid"} element={<Marticles/>}></Route>
-                <Route path="project" element={<Projects/>}></Route>
-                <Route path="aboutme" element={<AboutMe/>}></Route>
-                <Route path="experience" element={<Experience/>}></Route>
-                <Route path={"writearticle"} element={<WriteArticle/>}></Route>
-                <Route path={"editarticle/:articleid"} element={<EditArticle/>}></Route>
+                <Route index element={<NewArticles/>}/>
+                <Route path="homepage" element={<NewArticles/>}/>
+                <Route path="getarticles" element={<Articles/>}/>
+                <Route path="getarticle/:articleid" element={<Article />}/>
+                <Route path={"getmodulearticles/:moduleid"} element={<Marticles/>}/>
+                <Route path="project" element={<Projects/>}/>
+                <Route path="aboutme" element={<AboutMe/>}/>
+                <Route path="experience" element={<Experience/>}/>
+                <Route path={"writearticle"} element={<WriteArticle/>}/>
+                <Route path={"editarticle/:articleid"} element={<EditArticle/>}/>
             </Route>
         </Routes>
     </Router>,

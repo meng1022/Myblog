@@ -29,14 +29,14 @@ function Article(){
         setLoad(false);
     }
     async function getArticle(){
-        let url = "/getarticle?articleid="+articleid;
+        let url = "/api/getarticle?articleid="+articleid;
         let response = await fetch(url);
         let body = await response.json();
         setArticle(body.data.article);
         setModules(body.data.modulenames);
     }
     return(
-          <Grid item md={8} xs={11} sx={{ml:'2em',mr:'2em', mt:'2em'}}>
+          <Grid item md={8} xs={11} sx={{ml:'0em',mr:'2em', mt:'2em'}}>
               {/*<img src={clientid}></img>*/}
               {/*<input type={"file"}/>*/}
               <Typography variant={"h5"}>

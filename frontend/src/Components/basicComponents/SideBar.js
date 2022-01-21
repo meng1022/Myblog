@@ -67,7 +67,7 @@ function SideBar(props){
     const {modules,networks} = props;
 
     return(
-        <Grid item md={3} sm={11} xs={11} sx={{mt:'1em',ml:'1em'}}>
+        <Grid item md={3} sm={11} xs={11} sx={{mt:'1em'}}>
             <Paper elevation={0} sx={{ p: 2, bgcolor: '#fdf7ec', mb:'2em'}}>
                 <Typography variant="h6" gutterBottom>
                     About

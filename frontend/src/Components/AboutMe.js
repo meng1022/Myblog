@@ -50,10 +50,10 @@ function AboutMe(){
     };
 
     return(
-        <Grid item md={8} sm={11} xs={11} sx={{mr:'2em'}}>
+        <Grid item md={8} sm={11} xs={11}>
             <Grid container>
-                <Grid item md={3} sm={3} xs={3} sx={{mt:'5em'}}>
-                    <Avatar alt="Meng Zhao" src={avatarMe} sx={{ width: 180, height: 180, mb:'2em'}}/>
+                <Grid item md={3} sm={3} xs={4} sx={{mt:'3em'}} >
+                    <Avatar alt="Meng Zhao" src={avatarMe} sx={{ width: 150, height: 150, mb:'2em'}} />
                     <Tabs orientation={"vertical"}
                           value={value}
                         onChange={handleChange}>
@@ -63,7 +63,7 @@ function AboutMe(){
                         <Tab label={"Contact"} {...a11yProps(3)}/>
                     </Tabs>
                 </Grid>
-                <Grid item md={8} sm={7} xs={5} sx={{ml:'3em',mt:'2em'}}>
+                <Grid item md={8} sm={7} xs={7} sx={{ml:'1em',mt:'1em'}}>
                     <TabPanel value={value} index={0}>
                         <Card sx={{bgcolor: '#fdf7ec',mb:'2em'}}>
                             <CardContent>

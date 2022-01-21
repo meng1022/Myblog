@@ -13,7 +13,7 @@ function NewArticles(){
     // const {code} = useParams();
 
     async function getNewArticles(){
-        let response = await fetch("/homepage");
+        let response = await fetch("/api/homepage");
         let body = await response.json();
         updateHot(body.data);
     }

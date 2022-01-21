@@ -75,7 +75,7 @@ function EditComponent(){
         }
 
         return(
-            <Grid item md={8}>
+            <Grid item md={8} xs={11}>
                 <TextField fullWidth={true}
                            id={"title"} label={"Title"}
                            onChange={TitleChange}

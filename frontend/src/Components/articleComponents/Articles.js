@@ -8,7 +8,7 @@ import {
     Button,
     Box,
     TextField,
-    Container
+    Container, Divider
 } from "@mui/material";
 import * as React from "react";
 import{Link as RouterLink} from 'react-router-dom';
@@ -41,7 +41,6 @@ function DeleteButton(props){
         setOpen(false);
     };
 
-
     if(sessionStorage.getItem("__USER_ID__")==="84921724")
         return (
             <Button>
@@ -66,12 +65,12 @@ function Articles(){
     const [search,setSearchKey] = React.useState("");
 
     async function getData(){
-        let response = await fetch("/getarticles");
+        let response = await fetch("/api/getarticles");
         let body = await response.json();
         updateArticles(body.data);
     }
 
-    if(firstLoad==true){
+    if(firstLoad){
         // getModules();
         getData();
         setLoad(false);
@@ -83,7 +82,7 @@ function Articles(){
 
     function handleSearch(){
         (async()=>{
-            const response = await fetch("/searcharticles",{
+            const response = await fetch("/api/searcharticles",{
                method:'POST',
                headers:{
                    'Accept':'application/json',
@@ -101,25 +100,32 @@ function Articles(){
         <Grid item md={8} sm={11} xs={11} sx={{mr:'2em',mt:'1em'}}>
             <Container sx={{textAlign:'center',mb:'2em'}}>
                 <TextField width={35} id={"search"} required={true}
-                           label={"Search Here"} size={"small"} focused
-                            onChange={handleChange}/>
+                           label={"Search Here"} size={"small"} color={"grey"}
+                           focused onChange={handleChange}/>
                 <Button onClick={handleSearch}><SearchIcon/></Button>
             </Container>
 
             {articles.map((article)=>(
                 <Grid sx={{mt: '1em'}} container>
-                    <Grid item md={8} sm={6} xs={12} key={article.id}>
-                        <Typography sx={{ml: '3em' }} component={"h3"} variant={"subtitle1"}>
+                    <Grid item md={11} sm={11} xs={11} key={article.id}>
+                        <Typography sx={{ml: '1em' }} component={"h3"} variant={"subtitle1"}>
                             <Link  sx={{textDecoration:'none'}} component={RouterLink} to={`/getarticle/${article.id}`} key={article.id}>
                                 {article.title}
                             </Link>
                         </Typography>
+                        <Divider/>
                     </Grid>
-                    <Grid item md={4} sm={6} xs={12} sx={{textAlign:'center'}}>
-                        {article.createZoneDate}
+                    {/*<Grid item md={4} sm={6} xs={12} sx={{textAlign:'center'}}>*/}
+                    {/*    /!*{article.createZoneDate}*!/*/}
+                    {/*    <DeleteButton articleid={article.id}/>*/}
+                    {/*</Grid>*/}
+                    <Grid item md={1} sm={1} xs={1} xs={{mr:'1em'}}>
+                        {/*{article.createZoneDate}*/}
                         <DeleteButton articleid={article.id}/>
                     </Grid>
+
                 </Grid>
+
             ))}
         </Grid>
     ) ;
