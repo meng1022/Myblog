@@ -127,7 +127,11 @@ function AboutMe(){
                             </CardContent>
                         </Card>
                     </TabPanel>
-                    <TabPanel value={value} index={3}>Email: m235zhao@uwaterloo.ca</TabPanel>
+                    <TabPanel value={value} index={3}>
+                        <Typography xs={{mb:'5em'}} textAlign={"center"}>
+                            Email: zhaomeng0903@outlook.com
+                        </Typography>
+                    </TabPanel>
 
                 </Grid>
             </Grid>

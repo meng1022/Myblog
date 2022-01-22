@@ -25,7 +25,7 @@ const rootElement = document.getElementById("enter");
 ReactDOM.render(
     <Router>
         <Routes>
-            <Route path="/" element={<Basic sections={sections} title="Myblog"/>}>
+            <Route path="/" element={<Basic sections={sections} title=""/>}>
                 <Route index element={<NewArticles/>}/>
                 <Route path="homepage" element={<NewArticles/>}/>
                 <Route path="getarticles" element={<Articles/>}/>

@@ -8,7 +8,7 @@ function ImageName(props){
         return null;
     return(
       <Typography sx={{ml:'2em'}}>
-          Image URL (./api/getImg/{imgName})
+          Image URL (/api/getImg/{imgName})
       </Typography>
     );
 }

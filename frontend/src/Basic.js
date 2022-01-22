@@ -1,9 +1,10 @@
 import React from 'react';
-import {Toolbar, Button, Typography, Link, Box, Container, Grid} from '@mui/material'
+import {Toolbar, Button, Typography, Link, Box, Container, Grid, MenuItem} from '@mui/material'
 import { Outlet, Link as RouterLink,useParams } from 'react-router-dom';
 import SideBar from "./Components/basicComponents/SideBar";
-import {GitHub, LinkedIn, Twitter} from "@mui/icons-material";
-
+import {GitHub, LinkedIn, Menu, Twitter} from "@mui/icons-material";
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import PowerSettingsNewRoundedIcon from '@mui/icons-material/PowerSettingsNewRounded';
 
 const networks = [
     {name:'GitHub',icon: GitHub,url:"https://github.com/meng1022"},
@@ -12,20 +13,25 @@ const networks = [
 ];
 
 function MyButton(props) {
-    // const { Userid } = props;
     const {userid,username} = props;
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
     const handleLogOut = ()=>{
-        // sessionStorage.removeItem("user");
-        // sessionStorage.setItem("user",null);
         sessionStorage.removeItem("__USER_ID__");
         sessionStorage.removeItem("__USER_NAME__");
     };
-    // if(Userid!==""&&Userid!=null)
-    if(userid!=null&&userid!="")
+    const handleClick = (event) =>{
+        setAnchorEl(event.currentTarget);
+    }
+    const handleClose = () =>{
+        setAnchorEl(null);
+    }
+
+    if(userid!=null&&userid!=="")
         return(
-            <Button onClick={handleLogOut} href={"/homepage"}>
-                Logout, {username}
-                {/*Logout, {user.username}*/}
+            <Button onClick={handleLogOut} href={"/homepage"} variant="outlined" sx={{textTransform: "none"}}>
+                <PowerSettingsNewRoundedIcon fontSize={"medium"} sx={{mr:'0.2em'}}/>
+                {username}
             </Button>
         );
     else
@@ -120,7 +126,11 @@ function Basic(props) {
     return (
         <Container maxWidth={'lg'} >
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Button size="small" component={RouterLink} color="inherit" to={"/homepage"}>Home</Button>
+                <Button size="small" component={RouterLink} color="inherit" to={"/homepage"}>
+                    <HomeOutlinedIcon fontSize={"large"} color={"primary"}/>
+                    <Typography color={"primary"} sx={{textTransform: "none",mt:'0.5em',fontFamily:'-apple-system'}}
+                                >Meng-Zhao</Typography>
+                </Button>
                 <Typography
                     component="h2"
                     variant="h5"

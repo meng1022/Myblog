@@ -4,7 +4,7 @@ import {Link as RouterLink, useParams} from 'react-router-dom';
 import ReactMarkdown from "react-markdown";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import * as Color from "react-syntax-highlighter/dist/cjs/styles/prism";
-
+import HomePageImg from "./homePageImg";
 
 function NewArticles(){
     const[firstLoad,setLoad] = React.useState(true);
@@ -17,29 +17,14 @@ function NewArticles(){
         let body = await response.json();
         updateHot(body.data);
     }
-    // async function getToken(){
-    //     const settings = {
-    //         method: 'POST',
-    //         headers: {
-    //             Accept: 'application/json',
-    //         }
-    //     };
-    //     const url = "https://github.com/login/oauth/access_token?client_id=a5eca1aecf53810e6a8e&client_secret=5f57b71ca6b1282d263221ae48a2cd72601896a7&code="+code;
-    //     const fetchResponse = await fetch(url,settings);
-    //     const tokendata = await fetchResponse.json();
-    //     setToken(tokendata.access_token);
-    //     console.log("Token:",tokendata.access_token);
-    // }
     if(firstLoad){
         getNewArticles();
         setLoad(false);
     }
-    // if(code!=null&&code!=""&&firstToken==""){
-    //     getToken();
-    // }
 
     return(
         <Grid item md={8} sm={11} xs={11} sx={{mr:'2em',mt:'1em'}} >
+            <HomePageImg/>
             <Typography sx={{mb:'1em'}} variant={"h6"}>
                 Newly Posted Articles
             </Typography>
@@ -51,7 +36,7 @@ function NewArticles(){
                             {article.title}
                         </Link>
                     </Typography>
-                    <div>Write on {article.createZoneDate}</div>
+                    <Typography color={"text.secondary"}>Write on {article.createZoneDate}</Typography>
                     {/*<div dangerouslySetInnerHTML={{__html:article.content}}></div>*/}
                     <div>
                         <ReactMarkdown children={article.content}

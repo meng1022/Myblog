@@ -68,7 +68,7 @@ function WriteComponent(){
         }
 
         return(
-            <Grid item md={8} xs={11}>
+            <Grid item md={8} xs={11} sx={{mr:'2em',mt:'1em'}}>
                 <TextField fullWidth={true} id={"title"} label={"Title"} variant={"standard"} onChange={TitleChange}/>
                 <FormControl sx={{mt:'2em'}} fullWidth={true}>
                     <InputLabel id={"input_modules"}>Modules</InputLabel>
