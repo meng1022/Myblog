@@ -1,9 +1,10 @@
 import React from 'react';
-import {Toolbar, Button, Typography, Link, Box, Container, Grid, MenuItem} from '@mui/material'
+import {Toolbar, Button, Typography, Link, Box, Container, Grid, MenuItem, Tab, createTheme} from '@mui/material'
 import { Outlet, Link as RouterLink,useParams } from 'react-router-dom';
 import SideBar from "./Components/basicComponents/SideBar";
 import {GitHub, LinkedIn, Menu, Twitter} from "@mui/icons-material";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
 import PowerSettingsNewRoundedIcon from '@mui/icons-material/PowerSettingsNewRounded';
 
 const networks = [
@@ -14,22 +15,15 @@ const networks = [
 
 function MyButton(props) {
     const {userid,username} = props;
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+
     const handleLogOut = ()=>{
         sessionStorage.removeItem("__USER_ID__");
         sessionStorage.removeItem("__USER_NAME__");
     };
-    const handleClick = (event) =>{
-        setAnchorEl(event.currentTarget);
-    }
-    const handleClose = () =>{
-        setAnchorEl(null);
-    }
 
     if(userid!=null&&userid!=="")
         return(
-            <Button onClick={handleLogOut} href={"/homepage"} variant="outlined" sx={{textTransform: "none"}}>
+            <Button onClick={handleLogOut} href={"/homepage"} variant="outlined" sx={{textTransform: "none",fontFamily:'MyFont2', fontSize:22}}>
                 <PowerSettingsNewRoundedIcon fontSize={"medium"} sx={{mr:'0.2em'}}/>
                 {username}
             </Button>
@@ -37,9 +31,11 @@ function MyButton(props) {
     else
         return(
             // target={"_blank"}
-            <Button variant="outlined" size="small"  href="https://github.com/login/oauth/authorize?client_id=a5eca1aecf53810e6a8e">
+            <Button variant="outlined" size="small"
+                    href="https://github.com/login/oauth/authorize?client_id=a5eca1aecf53810e6a8e"
+                    sx={{fontFamily:'MyFont2', }}>
                 <GitHub sx={{mr:'0.5em'}}/>
-                <span >Sign In</span>
+                <span>Sign In</span>
             </Button>
         );
 }
@@ -50,7 +46,6 @@ function Basic(props) {
     const [Token, setToken] = React.useState("");
     const [userid, setUserid] = React.useState(sessionStorage.getItem("__USER_ID__"));
     const [username, setUsername] = React.useState(sessionStorage.getItem("__USER_NAME__"));
-    // const [user, setUser] = React.useState(sessionStorage.getItem("user"));
     const [modules, updateModules] = React.useState([]);
     const queryString = document.location.search;
 
@@ -102,10 +97,8 @@ function Basic(props) {
         let user_response = await fetch("/api/getUserinfo?code="+code);
         let body = await user_response.json();
         if(body.message==="ok"){
-            // console.log(body.data);
             setUserid(body.data.userid);
             setUsername(body.data.username);
-            // setUser(body.data);
             sessionStorage.setItem("__USER_ID__",body.data.userid);
             sessionStorage.setItem("__USER_NAME__",body.data.username);
         }
@@ -116,20 +109,21 @@ function Basic(props) {
         setLoad(false);
     }
 
-    // if(queryString!=null&&queryString!=""&&(Userid===""||Userid==null)){
-    //     getUserinfo();
-    // }
     if(queryString!=null&&queryString!==""&&(userid==null||userid==="")){
         getUserinfo();
     }
 
     return (
+        // <Box sx={{bgcolor:"#FFFAF0"}}>
+        <Box sx={{bgcolor:"rgba(255, 222, 173,.05)"}}>
+
         <Container maxWidth={'lg'} >
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Button size="small" component={RouterLink} color="inherit" to={"/homepage"}>
-                    <HomeOutlinedIcon fontSize={"large"} color={"primary"}/>
-                    <Typography color={"primary"} sx={{textTransform: "none",mt:'0.5em',fontFamily:'-apple-system'}}
-                                >Meng-Zhao</Typography>
+                    <CottageOutlinedIcon fontSize={"large"} color={"primary"}/>
+                    <Typography color={"primary"} sx={{textTransform: "none",mt:'0.5em',fontFamily:'MyFont2',fontSize:15}}>
+                        Meng-Zhao
+                    </Typography>
                 </Button>
                 <Typography
                     component="h2"
@@ -141,7 +135,6 @@ function Basic(props) {
                 >
                     {title}
                 </Typography>
-                {/*<MyButton Userid={Userid}></MyButton>*/}
                 <MyButton userid={userid} username={username}/>
             </Toolbar>
             <Toolbar
@@ -157,9 +150,11 @@ function Basic(props) {
                         variant="subtitle1"
                         to={section.url}
                         component={RouterLink}
-                        sx={{ p: 1, flexShrink: 0, textDecoration:'none' }}
+                        sx={{ p: 1, flexShrink: 0, textDecoration:'none', }}
                     >
+                        <Typography sx={{fontFamily: 'MyFont2',fontSize:18}} color={"primary"}>
                         {section.title}
+                        </Typography>
                     </Link>
                 ))}
             </Toolbar>
@@ -178,6 +173,7 @@ function Basic(props) {
                 </Grid>
             </Grid>
         </Container>
+        </Box>
     );
 }
 export default Basic;

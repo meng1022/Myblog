@@ -11,3 +11,25 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'MyFont';
+  src: local('Amatic-Bold'),url("./fonts/Amatic-Bold.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'MyFont1';
+  src: local('MyFont1'),url("./fonts/MochiyPopPOne-Regular.ttf") format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'MyFont2';
+  src: local('MyFont2'),url("./fonts/Ubuntu-Regular.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'MyFont3';
+  src: local('MyFont3'),url("./fonts/IndieFlower-Regular.ttf") format('truetype');
+  font-weight: bold;
+}

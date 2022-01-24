@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ArticleDao extends JpaRepository<Article,Long> {
 
-    List<Article> findTop2ByOrderByCreateTimeDesc();
+    List<Article> findTop4ByOrderByCreateTimeDesc();
 
     List<Article> findAllByOrderByCreateTimeDesc();
 

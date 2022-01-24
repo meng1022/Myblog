@@ -77,7 +77,7 @@ function SideBar(props){
                     i contributed to, some ideas that come to my mind and some inspirational knowledge i obtain.</Typography>
             </Paper>
             <Divider/>
-            <Typography  variant={"h6"}>
+            <Typography  variant={"h6"} color={"grey"} sx={{fontFamily:'MyFont2'}}>
                 Topics and Modules
             </Typography>
             {/*<List>*/}
@@ -94,7 +94,7 @@ function SideBar(props){
             ))}
             {/*</List>*/}
             <Divider/>
-            <Typography variant={"h6"}>
+            <Typography variant={"h6"} sx={{fontFamily:'MyFont2'}}>
                 Other
             </Typography>
             <List>

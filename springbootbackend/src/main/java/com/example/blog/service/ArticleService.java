@@ -22,7 +22,13 @@ public class ArticleService {
     ModuleDao moduleDao;
 
     public List<Article> getRecentArticles(){
-        return articleDao.findTop2ByOrderByCreateTimeDesc();
+        List<Article> ans = articleDao.findTop4ByOrderByCreateTimeDesc();
+        for(Article article:ans){
+            if(article.getContent().length()>200){
+                article.setContent(article.getContent().substring(0,200)+"...");
+            }
+        }
+        return ans;
     }
 
     public List<Article> getArticles(){

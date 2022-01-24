@@ -12,7 +12,8 @@ import {
     CardActions, CardActionArea
 } from "@mui/material";
 import * as React from "react";
-import avatarMe from "../static/images/avatarMe.png";
+import avatarMe from "../static/images/avatarMe.jpg";
+import avatarMe1 from "../static/images/avatarMe1.png";
 import BUPT_LOGO from "../static/images/BUPT_LOGO.png";
 import UW_LOGO from "../static/images/UW_LOGO.png";
 
@@ -51,9 +52,14 @@ function AboutMe(){
 
     return(
         <Grid item md={8} sm={11} xs={11}>
-            <Grid container sx={{mt:'3em'}}>
-                    <Grid item md={11} xs={11}><Avatar alt="Meng Zhao" src={avatarMe} sx={{ width: 150, height: 150, mb:'2em',ml:'2em'}} /></Grid>
-                    <Grid item md={12} xs={12}>
+            <Grid container sx={{mt:'2em'}} justifyContent="center">
+                    <Grid item md={3} xs={5}>
+                        <Avatar alt="Meng Zhao" src={avatarMe} sx={{ width: 150, height: 150, mb:'1em'}} />
+                    </Grid>
+                    <Grid item md={3} xs={5}>
+                        <Avatar alt="Meng Zhao" src={avatarMe1} sx={{ width: 110, height: 110, mb:'1em'}} />
+                    </Grid>
+                    <Grid item md={10} xs={12}>
                         <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons allowScrollButtonsMobile>
                             <Tab label={"AboutMe"} {...a11yProps(0)}/>
                             <Tab label={"Education"} {...a11yProps(1)}/>
@@ -81,7 +87,8 @@ function AboutMe(){
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     I finished my graduate study in University of Waterloo, Ontario, Canada in 2021,
-                                    and got my master in Engineering degree in Software.
+                                    and got my master of Engineering degree in Electrical & Computer Engineering with
+                                    software specialization.
                                 </Typography>
                             </CardContent>
                         </Card>
@@ -92,7 +99,7 @@ function AboutMe(){
                             <CardContent>
                                 <Typography variant={"body1"}>
                                     I pursued my undergraduate study in Beijing University of Posts and Telecommunications,
-                                    Beijing, China between 2016 and 2020, and got bachelor's degree in Engineering in Network Engineering.
+                                    Beijing, China between 2016 and 2020, and got bachelor's degree of Engineering in Network Engineering.
                                 </Typography>
                             </CardContent>
                         </Card>

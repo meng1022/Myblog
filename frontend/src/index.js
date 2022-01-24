@@ -15,8 +15,8 @@ import EditArticle from "./Components/articleComponents/EditArticle";
 
 const sections = [
     {title: 'Articles', url:'/getarticles'},
-    {title: 'Project', url:'/project'},
-    {title: 'AboutMe', url:'/aboutme'},
+    {title: 'Projects', url:'/project'},
+    {title: 'About', url:'/aboutme'},
     {title: 'Experience', url:'/experience'},
 ];
 
