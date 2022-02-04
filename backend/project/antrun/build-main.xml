@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<project name="maven-antrun-" default="main"  >
-<target name="main">
-  <copy todir="D:\Blog\springmvcblog\springbootbackend\target/classes/static">
-    <fileset dir="../frontend/build"/>
-  </copy>
-</target>
-</project>
