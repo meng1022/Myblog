@@ -34,13 +34,19 @@ npm start
 ## Examples
 
 ### 1. This is the homepage
-![homepage](./img/homepage.png)
+![homepage](./img/home.png)
 
 ### 2. This is the article list
 ![articles](./img/articles.png)
 
-### 3. This is one of the project page
-![module](./img/projects.png)
+### 3. This is demo page
+![demo](./img/demos.png)
+
+### 4. This page shows comments
+![comment](./img/comment.png)
+
+### 4. This is aboutme page
+![about](./img/aboutme.png)
 
 
 ### More pages will be found when you run this application
@@ -49,3 +55,6 @@ npm start
 * This blog is still under development, most of the basic functions have been implemented.
 
 * Some features is being developed now, like commenting, sending email, and direct messages within the blog.
+
+## Updated -- 2/3/2022
+Comment, message notification, and sending emails have been implemented, visitors can log in this blog to post comments.
