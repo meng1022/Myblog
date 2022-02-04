@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c13250fd.css",
+    "main.js": "/static/js/main.72224ba0.js",
+    "static/media/MochiyPopPOne-Regular.ttf": "/static/media/MochiyPopPOne-Regular.a343480e7534e19d0c78.ttf",
+    "static/media/Ubuntu-Regular.ttf": "/static/media/Ubuntu-Regular.fbdecfce69a96dc73e2a.ttf",
+    "static/media/UW_LOGO.png": "/static/media/UW_LOGO.4c8baa431aa9388cdfdf.png",
+    "static/media/homeImg.jpg": "/static/media/homeImg.60e5058bf270c1b98bbf.jpg",
+    "static/media/Amatic-Bold.ttf": "/static/media/Amatic-Bold.c53c4ae5ec7d4634f3f4.ttf",
+    "static/media/BUPT_LOGO.png": "/static/media/BUPT_LOGO.7aea76749eaf107c2ede.png",
+    "static/media/IndieFlower-Regular.ttf": "/static/media/IndieFlower-Regular.9bd64a340a69779c0571.ttf",
+    "static/media/avatarMe.jpg": "/static/media/avatarMe.7dba2be3e8fdde0b5837.jpg",
+    "static/media/Insupr_LOGO.png": "/static/media/Insupr_LOGO.6fac728fe3cba044ac92.png",
+    "index.html": "/index.html",
+    "main.c13250fd.css.map": "/static/css/main.c13250fd.css.map",
+    "main.72224ba0.js.map": "/static/js/main.72224ba0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c13250fd.css",
+    "static/js/main.72224ba0.js"
+  ]
+}
