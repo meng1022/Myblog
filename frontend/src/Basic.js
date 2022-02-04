@@ -1,52 +1,150 @@
 import React from 'react';
-import {Toolbar, Button, Typography, Link, Box, Container, Grid, MenuItem, Tab, createTheme} from '@mui/material'
+import {
+    Toolbar,
+    Button,
+    Typography,
+    Link,
+    Box,
+    Container,
+    Grid,
+    Badge, Avatar, Tooltip, IconButton, List, ListItem, Menu, MenuItem, Divider
+} from '@mui/material'
 import { Outlet, Link as RouterLink,useParams } from 'react-router-dom';
 import SideBar from "./Components/basicComponents/SideBar";
-import {GitHub, LinkedIn, Menu, Twitter} from "@mui/icons-material";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import {GitHub, LinkedIn} from "@mui/icons-material";
+import MailRoundedIcon from '@mui/icons-material/MailRounded';
 import CottageOutlinedIcon from '@mui/icons-material/CottageOutlined';
-import PowerSettingsNewRoundedIcon from '@mui/icons-material/PowerSettingsNewRounded';
+import MessageRoundedIcon from '@mui/icons-material/MessageRounded';
 
 const networks = [
     {name:'GitHub',icon: GitHub,url:"https://github.com/meng1022"},
     {name: 'LinkedIn', icon: LinkedIn,url:"https://www.linkedin.com/in/meng-zhao-764152228/"},
-    {name: 'Twitter',icon: Twitter,url:"#"},
+    {name: 'Email',icon: MailRoundedIcon,url:"mailto:zhaomeng0903@outlook.com"},
 ];
 
 function MyButton(props) {
-    const {userid,username} = props;
+    const {userid,username,avatar} = props;
+    const [firstLoad,setLoad] = React.useState(true);
+    // const [anchorEl, setAnchorEl] = React.useState(null);
+    // const [notifications,setNotify] = React.useState([]);
+    const [msgNo, setMsgNo] = React.useState(0);
+    let lockReconnect = false;
+    let socket;
+    let socketUrl = "wss://www.meng-zhao.com/websocket/"+userid;
+    // let socketUrl = "ws://localhost:8080/websocket/"+userid;
+
+    if(firstLoad&&userid!=null&&userid!==""){
+        // socket = new WebSocket("wss://www.meng-zhao.com/websocket/"+userid);
+        // socket.onmessage = function(msg){
+        //     const count = parseInt(msg.data);
+        //     setMsgNo(count);
+        // };
+        // socket.onopen = function(){
+        //     fetch("/api/getnotificationcount?userid="+userid);
+        // };
+        // socket.onclose = function (){
+        //
+        // };
+        createWebSocket(socketUrl);
+        setLoad(false);
+    }
+
+    function createWebSocket(url){
+        socket = new WebSocket(url);
+        initEventHandle();
+    }
+
+    function initEventHandle(){
+        socket.onmessage = function(msg){
+            heartCheck.reset().start();
+            if(msg.data!=="success"){
+                const count = parseInt(msg.data);
+                setMsgNo(count);
+            }
+            console.log(msg.data);
+        }
+        socket.onopen = function(){
+            fetch("/api/getnotificationcount?userid="+userid);
+            heartCheck.reset().start();
+        }
+        socket.onclose = function(){
+            reConnect(socketUrl);
+        }
+        socket.onerror = function(){
+            reConnect(socketUrl);
+            console.log("websocket connection error");
+        }
+    }
+
+    function reConnect(url){
+        //if is not connected there would be tons of requests
+        // set a timer to avoid this.
+        if(lockReconnect) return;
+        lockReconnect = true;
+        setTimeout(function(){
+            createWebSocket(url);
+            console.log("trying to reconnect");
+            lockReconnect = false;
+        },2000);
+    }
+
+    // send a test message to backend every minute
+    const heartCheck = {
+        timeOut: 60000,
+        timeOutObj: null,
+        serverTimeoutObj: null,
+        reset: function(){
+            clearTimeout(this.timeOutObj);
+            clearTimeout(this.serverTimeoutObj);
+            return this;
+        },
+        start: function(){
+            let self = this;
+            this.timeOutObj = setTimeout(function(){
+                socket.send("test");
+                self.serverTimeoutObj = setTimeout(function(){
+                    socket.close();
+                },self.timeOut);
+            },this.timeOut);
+        }
+    }
+
 
     const handleLogOut = ()=>{
-        sessionStorage.removeItem("__USER_ID__");
-        sessionStorage.removeItem("__USER_NAME__");
+        sessionStorage.clear();
     };
 
-    if(userid!=null&&userid!=="")
-        return(
-            <Button onClick={handleLogOut} href={"/homepage"} variant="outlined" sx={{textTransform: "none",fontFamily:'MyFont2', fontSize:22}}>
-                <PowerSettingsNewRoundedIcon fontSize={"medium"} sx={{mr:'0.2em'}}/>
-                {username}
-            </Button>
-        );
-    else
-        return(
-            // target={"_blank"}
-            <Button variant="outlined" size="small"
-                    href="https://github.com/login/oauth/authorize?client_id=a5eca1aecf53810e6a8e"
-                    sx={{fontFamily:'MyFont2', }}>
-                <GitHub sx={{mr:'0.5em'}}/>
-                <span>Sign In</span>
-            </Button>
-        );
+    return((userid!=null&&userid!=="")?(
+        <Box>
+            <IconButton component={RouterLink} to={"/notifications"}>
+                <Badge badgeContent={msgNo} color={"error"}>
+                    <MessageRoundedIcon color={"primary"}/>
+                </Badge>
+            </IconButton>
+            <Tooltip title={"log out"}>
+                <IconButton onClick={handleLogOut} href={"/homepage"} sx={{textTransform: "none",fontFamily:'MyFont2', fontSize:15}}>
+                    <Avatar src={avatar} alt={username}/>
+                </IconButton>
+            </Tooltip>
+        </Box>):(
+        <Tooltip title={"log in"}>
+            <IconButton href="https://github.com/login/oauth/authorize?client_id=a5eca1aecf53810e6a8e"
+                        sx={{fontFamily:'MyFont2'}}>
+                        {/*target={"_blank"}*/}
+                <GitHub color={"primary"} fontSize={"large"}/>
+            </IconButton>
+        </Tooltip>
+    ));
 }
 
 function Basic(props) {
     const { sections, title } = props;
     const [firstLoad,setLoad] = React.useState(true);
-    const [Token, setToken] = React.useState("");
     const [userid, setUserid] = React.useState(sessionStorage.getItem("__USER_ID__"));
     const [username, setUsername] = React.useState(sessionStorage.getItem("__USER_NAME__"));
+    const [avatar,setAvatar] = React.useState(sessionStorage.getItem("__USER_AVATAR__"));
     const [modules, updateModules] = React.useState([]);
+
     const queryString = document.location.search;
 
     async function getModules(){
@@ -55,43 +153,8 @@ function Basic(props) {
         updateModules(body.data);
     }
 
-    async function getToken(){
-        let params = new URLSearchParams(queryString);
-        let code = params.get("code");
-        console.log("code",code);
-
-        let request = new XMLHttpRequest();
-        request.onreadystatechange = function(){
-            if(request.readyState == XMLHttpRequest.DONE){
-                // console.log(request.response.access_token);
-                console.log(request.responseType);
-                let json = JSON.parse(request.responseText);
-                setToken(json.access_token);
-            }
-        }
-        request.open('POST',
-            'https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
-            true
-            );
-        request.setRequestHeader('Accept','application/json');
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send("client_id=a5eca1aecf53810e6a8e"+
-                            "&client_secret=5f57b71ca6b1282d263221ae48a2cd72601896a7"+
-                            "&code="+code);
-    }
-
-    async function getToken_bak(){
-        let params = new URLSearchParams(queryString);
-        let code = params.get("code");
-        let token_response = await fetch("/api/getToken?code="+code);
-        let body = await token_response.json();
-        if(body.message==="ok"){
-            console.log(body.data);
-            setToken(body.data);
-        }
-    }
-
     async function getUserinfo(){
+        console.log(document.location);
         let params = new URLSearchParams(queryString);
         let code = params.get("code");
         let user_response = await fetch("/api/getUserinfo?code="+code);
@@ -99,9 +162,14 @@ function Basic(props) {
         if(body.message==="ok"){
             setUserid(body.data.userid);
             setUsername(body.data.username);
+            setAvatar(body.data.avatar);
+            // setMsgNo(body.data.msgno);
             sessionStorage.setItem("__USER_ID__",body.data.userid);
             sessionStorage.setItem("__USER_NAME__",body.data.username);
+            sessionStorage.setItem("__USER_AVATAR__",body.data.avatar);
+
         }
+
     }
 
     if(firstLoad){
@@ -114,15 +182,13 @@ function Basic(props) {
     }
 
     return (
-        // <Box sx={{bgcolor:"#FFFAF0"}}>
         <Box sx={{bgcolor:"rgba(255, 222, 173,.05)"}}>
-
         <Container maxWidth={'lg'} >
             <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Button size="small" component={RouterLink} color="inherit" to={"/homepage"}>
                     <CottageOutlinedIcon fontSize={"large"} color={"primary"}/>
                     <Typography color={"primary"} sx={{textTransform: "none",mt:'0.5em',fontFamily:'MyFont2',fontSize:15}}>
-                        Meng-Zhao
+                         Meng-Zhao
                     </Typography>
                 </Button>
                 <Typography
@@ -135,12 +201,12 @@ function Basic(props) {
                 >
                     {title}
                 </Typography>
-                <MyButton userid={userid} username={username}/>
+                <MyButton userid={userid} username={username} avatar={avatar}/>
             </Toolbar>
             <Toolbar
                 component="nav"
                 variant="dense"
-                sx={{ justifyContent: 'space-between' }}
+                sx={{ justifyContent: 'space-between',overflow:'auto',whiteSpace:'nowarp' }}
             >
                 {sections.map((section) => (
                     <Link

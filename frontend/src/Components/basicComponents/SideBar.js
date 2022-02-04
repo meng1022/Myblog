@@ -14,6 +14,51 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import {Link as RouterLink} from 'react-router-dom';
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+
+function DeleteModule(props){
+    const {moduleid} = props;
+    const [open,setOpen] = React.useState(false);
+    const handleClickOpen = ()=>{
+        setOpen(true);
+    };
+    const handleClose = ()=>{
+        setOpen(false);
+    };
+
+    function handleDelete(){
+        (async()=>{
+            const response = await fetch("/deletemodule",{
+                method:'POST',
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json',
+                },
+                body: JSON.stringify({moduleid:moduleid})
+            });
+            const body = await response.json();
+            console.log(body.data);
+        })();
+        setOpen(false);
+    };
+
+    if(sessionStorage.getItem("__USER_ID__")==="84921724")
+        return (
+            <Button>
+                <DeleteOutlineIcon onClick={handleClickOpen}/>
+                <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>
+                        Are you sure to delete this module?
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={handleDelete} href={"/homepage"}>Delete</Button>
+                        <Button onClick={handleClose}>Dismiss</Button>
+                    </DialogActions>
+                </Dialog>
+            </Button>
+        );
+    return null;
+}
 
 function FunctionList(){
     const [open,setOpen] = React.useState(false);
@@ -46,8 +91,8 @@ function FunctionList(){
         return(
             <Box>
                 <Divider/>
-                <Button sx={{ml:'1em'}} component={RouterLink} to={"/writearticle"}>Post an article</Button>
-                <Button sx={{ml:'1em'}} onClick={handleOpen}>Create a module</Button>
+                <Button sx={{ml:'0.5em',fontFamily:'MyFont2',textTransform:'none',fontSize:18}} component={RouterLink} to={"/writearticle"}>Post an article</Button>
+                <Button sx={{ml:'0.5em',fontFamily:'MyFont2',textTransform:'none',fontSize:18}} onClick={handleOpen}>Create a module</Button>
                 <Dialog open={open} onClose={handleClose}>
                     <DialogTitle>Please input the new module name:</DialogTitle>
                     <TextField sx={{ml:'1em',mr:'1em'}} id={"modulename"} label={"Module Name"} onChange={handleChange}/>
@@ -59,7 +104,6 @@ function FunctionList(){
             </Box>
         );
     }
-
     return null;
 }
 
@@ -82,14 +126,20 @@ function SideBar(props){
             </Typography>
             {/*<List>*/}
             {modules.map((module)=>(
-                // <ListItem key={module.id}>
-                <Typography sx={{ml:'1em',mb:'0.5em'}}>
-                    <Link sx={{textDecoration:'none'}}
-                          component={RouterLink}
-                          to={`/getmodulearticles/${module.id}`}>
-                            {module.modulename}
-                    </Link>
-                </Typography>
+                <Grid container>
+                    <Grid item md={9}>
+                        <Typography sx={{ml:'1em',mb:'0.5em'}}>
+                            <Link sx={{textDecoration:'none'}}
+                                  component={RouterLink}
+                                  to={`/getmodulearticles/${module.id}`}>
+                                    {module.modulename}
+                            </Link>
+                        </Typography>
+                    </Grid>
+                    <Grid item md={1}>
+                        <DeleteModule moduleid={module.id}/>
+                    </Grid>
+                </Grid>
                 // </ListItem>
             ))}
             {/*</List>*/}

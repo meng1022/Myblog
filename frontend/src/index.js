@@ -12,12 +12,16 @@ import Basic from "./Basic";
 import Articles from "./Components/articleComponents/Articles";
 import WriteArticle from "./Components/articleComponents/WriteArticle";
 import EditArticle from "./Components/articleComponents/EditArticle";
+import Demo from "./Components/DemoComponents/Demo"
+import Notifications from "./Components/basicComponents/Notifications";
 
 const sections = [
     {title: 'Articles', url:'/getarticles'},
     {title: 'Projects', url:'/project'},
+    {title: 'Demos',url:'/demo'},
     {title: 'About', url:'/aboutme'},
     {title: 'Experience', url:'/experience'},
+
 ];
 
 
@@ -32,10 +36,12 @@ ReactDOM.render(
                 <Route path="getarticle/:articleid" element={<Article />}/>
                 <Route path={"getmodulearticles/:moduleid"} element={<Marticles/>}/>
                 <Route path="project" element={<Projects/>}/>
+                <Route path={"demo"} element={<Demo/>}/>
                 <Route path="aboutme" element={<AboutMe/>}/>
                 <Route path="experience" element={<Experience/>}/>
                 <Route path={"writearticle"} element={<WriteArticle/>}/>
                 <Route path={"editarticle/:articleid"} element={<EditArticle/>}/>
+                <Route path={"notifications"} element={<Notifications/>}/>
             </Route>
         </Routes>
     </Router>,

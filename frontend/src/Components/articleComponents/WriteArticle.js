@@ -107,7 +107,9 @@ function WriteComponent(){
                                                    {children}
                                                </code>
                                            )
-                                       }
+                                       },
+                                       img:({node,...props})=>
+                                           <img style={{maxWidth:'90%'}}{...props}/>
                                    }}
                     />
                 </Paper>

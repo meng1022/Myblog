@@ -115,10 +115,6 @@ function Articles(){
                         </Typography>
                         <Divider/>
                     </Grid>
-                    {/*<Grid item md={4} sm={6} xs={12} sx={{textAlign:'center'}}>*/}
-                    {/*    /!*{article.createZoneDate}*!/*/}
-                    {/*    <DeleteButton articleid={article.id}/>*/}
-                    {/*</Grid>*/}
                     <Grid item md={1} sm={1} xs={1} xs={{mr:'1em'}}>
                         {/*{article.createZoneDate}*/}
                         <DeleteButton articleid={article.id}/>

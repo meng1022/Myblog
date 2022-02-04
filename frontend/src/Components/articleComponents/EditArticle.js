@@ -121,8 +121,11 @@ function EditComponent(){
                                                    {children}
                                                </code>
                                            )
-                                       }
+                                       },
+                                       img:({node,...props})=>
+                                           <img style={{maxWidth:'90%'}}{...props}/>
                                    }}
+
                     />
                 </Paper>
                 <Button sx={{mt:'2em'}} onClick={submit} href={"/getarticles"}> Update </Button>

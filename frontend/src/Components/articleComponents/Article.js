@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import {Typography, Box, Grid, Link, ButtonGroup, Button} from '@mui/material'
+import {Typography, Box, Grid, Link, ButtonGroup, Button, Divider} from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import * as Color from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ReactMarkdown from "react-markdown";
-// import clientid from "../../static/articleimgs/clientid.png";
+import Comment from "./Comment";
 
 function EditButton(props){
     const{articleid} = props;
@@ -22,24 +22,51 @@ function Article(){
     const[firstLoad,setLoad] = React.useState(true);
     const[article,setArticle] = React.useState([]);
     const[modules,setModules] = React.useState([]);
+    const [comments,setComments] = React.useState([]);
     const {articleid} = useParams();
 
+    //able to comment
+    // const [able,setAble] = React.useState(false);
+    // if(sessionStorage.getItem("__USER_ID__")){
+    //     setAble(true);
+    // }
+
     if(firstLoad){
-        getArticle();
+        (async()=>{
+            let response = await fetch("/api/getarticle?articleid="+articleid);
+            let body = await response.json();
+            setArticle(body.data.article);
+            setModules(body.data.modulenames);
+        })();
+
+        // (async()=>{
+        //     let response = await fetch("/api/getcomments?articleid="+articleid);
+        //     let body = await response.json();
+        //     setComments(body.data);
+        // })();
+        // getArticle();
+        // getComments();
         setLoad(false);
     }
-    async function getArticle(){
-        let url = "/api/getarticle?articleid="+articleid;
-        let response = await fetch(url);
-        let body = await response.json();
-        setArticle(body.data.article);
-        setModules(body.data.modulenames);
-    }
+
+    // async function getArticle(){
+    //     let url = "/api/getarticle?articleid="+articleid;
+    //     let response = await fetch(url);
+    //     let body = await response.json();
+    //     setArticle(body.data.article);
+    //     setModules(body.data.modulenames);
+    // }
+    //
+    // async function getComments(){
+    //     let response = await fetch("/api/getcomments?articleid="+articleid);
+    //     let body = await response.json();
+    //     setComments(body.data);
+    // }
+
     return(
           <Grid item md={8} xs={11} sx={{ml:'0em',mr:'2em', mt:'2em'}}>
               <Typography variant={"h5"}>
-              {article.title}
-                  <EditButton articleid={article.id}/>
+                  {article.title}<EditButton articleid={article.id}/>
               </Typography>
               <ButtonGroup variant="text"
                            aria-label="text button group"
@@ -49,8 +76,6 @@ function Article(){
                   ))}
               </ButtonGroup>
               <div>Write on {article.createZoneTime}</div>
-              {/*<div dangerouslySetInnerHTML={{__html:article.content}}>*/}
-              {/*</div>*/}
               <div>
                   <ReactMarkdown children={article.content}
                                  components={{
@@ -69,10 +94,14 @@ function Article(){
                                                  {children}
                                              </code>
                                          )
-                                     }
+                                     },
+                                     img:({node,...props})=>
+                                         <img style={{maxWidth:'90%'}}{...props}/>
                                  }}
                   />
               </div>
+              <Divider sx={{mt:'2em',mb:'1em'}}/>
+              <Comment articleid={articleid}/>
           </Grid>
 
 
